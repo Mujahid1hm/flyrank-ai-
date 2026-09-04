@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refresh Opportunity Modeling for Search Content Teams</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --paper: #ffffff;
+      --ink: #1f2a37;
+      --muted: #5c6b7a;
+      --line: #dfe7f1;
+      --brand: #2f6fed;
+      --brand-soft: #eaf2ff;
+      --good: #1f9d6f;
+      --warn: #d9791f;
+      --bad: #c94e4e;
+      --shadow: 0 10px 30px rgba(26, 35, 51, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 48px 18px 80px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+      margin-bottom: 30px;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      line-height: 1.08;
+      margin: 0 0 12px;
+    }
+    .summary {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 820px;
+    }
+    section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 26px 24px;
+      margin-bottom: 26px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+    }
+    h3 {
+      margin: 14px 0 8px;
+      font-size: 1.1rem;
+    }
+    p, li {
+      color: var(--ink);
+      font-size: 1rem;
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .kpi {
+      background: var(--brand-soft);
+      border: 1px solid #d2e1ff;
+      border-radius: 12px;
+      padding: 16px 14px;
+    }
+    .kpi .label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+    }
+    .kpi .value {
+      font-weight: 700;
+      font-size: 1.6rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      background: #f2f6fc;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+    .good { color: var(--good); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    .bad { color: var(--bad); font-weight: 700; }
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .dot {
+      width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle;
+    }
+    .foot {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 14px;
+    }
+    @media (max-width: 640px) {
+      .hero, section { padding: 20px 16px; }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="eyebrow">FlyRank ML Internship Capstone</div>
+      <h1>Refresh Opportunity Modeling for Search Content Teams</h1>
+      <p class="summary">
+        This study asks whether a transparent machine-learning score can identify the pages most worth reviewing for refresh, using observed site signals and a client-aware holdout. The result is a ranked decision-support tool that helps teams prioritize review work without claiming causal impact.
+      </p>
+      <div class="badge">Lane: Refresh / Content Opportunity Scoring</div>
+    </header>
+
+    <section>
+      <h2>Abstract</h2>
+      <p>
+        Search content teams need to decide which pages deserve a refresh, but they cannot review everything. This project asks whether a compact, interpretable model can identify pages with the highest probability of decline using observed search and engagement signals. We built a transparent baseline and compared it to a logistic-regression model on the same client-aware holdout set. The model improved ranked review quality over the baseline, with a top-50 precision of 0.72 versus 0.32 and a higher ROC AUC of 0.62 versus 0.50. The model is intended as a decision-support ranking tool for human review, not as proof of causal impact or algorithmic certainty. The output is a ranked refresh playbook for prioritization, monitoring, and content maintenance.
+      </p>
+    </section>
+
+    <section>
+      <h2>Introduction / Problem statement</h2>
+      <p>
+        Content teams often see large backlogs of pages that are still live but drifting in performance. The decision problem is not “which page is definitely broken?” but “which pages are most likely to be underperforming relative to visible opportunity, and should we review them next?” The practical decision-support output is a ranked list of content refresh candidates, with reason codes that explain why a page may deserve attention.
+      </p>
+      <p>
+        In a search environment, the cost of a wrong call is not catastrophic, but it is still real: wasted review effort, delayed fixes, or over-optimization of the wrong pages. A transparent model reduces that risk by highlighting pages with declining demand, stale freshness, weak engagement, or page-position opportunity while keeping the decision in human hands.
+      </p>
+    </section>
+
+    <section>
+      <h2>Data</h2>
+      <p>
+        The study uses the FlyRank ML Internship dataset, restricted to the anonymized processed refresh feature set bundled in this repo. The analysis focuses on public-safe variables such as search volume, competition, CTR, average position, days since last update, content age, engagement rate, scroll rate, and categorical content descriptors. It excludes raw client identities, domains, URL strings, titles, and private query content. We also excluded label-derived fields such as trend direction and trend percentage from the learning feature matrix to avoid leakage and to keep the model aligned with operational decision support.
+      </p>
+      <p>
+        The label is the observed declining-page flag, defined as the target we want to identify in the live content review workflow. The reported results are measured on the same review split, not on the full corpus, so the evaluation reflects real-world generalization more honestly than a full-data ranking would.
+      </p>
+    </section>
+
+    <section>
+      <h2>Methodology</h2>
+      <p>
+        The baseline is a transparent score built from visible demand, freshness risk, position opportunity, and content depth. It uses interpretable rules: stale pages with visible demand, pages with weak CTR at visible positions, and pages with thin content but meaningful impressions are all pushed upward. The learned model is a logistic regression trained on the same features and evaluated on the same client-held-out test set. This preserves fairness: both methods are judged on the same outcome and the same split.
+      </p>
+      <p>
+        We used a grouped 80/20 split by client ID. A row-level random split would leak client-specific behavior into the evaluation and would overstate model quality. The model therefore approximates the deployment question: if a new client portfolio arrives, which pages should an editor review first?
+      </p>
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Design choice</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Target</td><td>Observed decline flag for content review</td></tr>
+          <tr><td>Features</td><td>Search demand, freshness, engagement, ranking position, and content metadata</td></tr>
+          <tr><td>Baseline</td><td>Transparent rule-based refresh score</td></tr>
+          <tr><td>Model</td><td>Logistic regression with standardized numeric features and one-hot encoded categories</td></tr>
+          <tr><td>Validation</td><td>Client-aware holdout, not random row split</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Results</h2>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="label">Test set size</span>
+          <span class="value">6,163</span>
+        </div>
+        <div class="kpi">
+          <span class="label">Base rate</span>
+          <span class="value">0.511</span>
+        </div>
+        <div class="kpi">
+          <span class="label">Precision@50 baseline</span>
+          <span class="value">0.32</span>
+        </div>
+        <div class="kpi">
+          <span class="label">Precision@50 model</span>
+          <span class="value">0.72</span>
+        </div>
+        <div class="kpi">
+          <span class="label">ROC AUC baseline</span>
+          <span class="value">0.50</span>
+        </div>
+        <div class="kpi">
+          <span class="label">ROC AUC model</span>
+          <span class="value">0.62</span>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Baseline</th>
+            <th>Model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Precision@20</td><td>0.40</td><td>0.70</td></tr>
+          <tr><td>Precision@50</td><td>0.32</td><td>0.72</td></tr>
+          <tr><td>Precision@100</td><td>0.31</td><td>0.70</td></tr>
+          <tr><td>ROC AUC</td><td>0.50</td><td>0.62</td></tr>
+          <tr><td>Average precision</td><td>0.48</td><td>0.60</td></tr>
+        </tbody>
+      </table>
+      <div class="foot">
+        Interpretation: the learned model improves review-quality ranking, especially in the top 20–50 items, where editorial bandwidth is usually smallest and decisions matter most.
+      </div>
+    </section>
+
+    <section>
+      <h2>Limitations &amp; honest framing</h2>
+      <p>
+        This is an observed, directional model. It identifies pages that look most likely to be declining or underperforming based on a fixed historical snapshot, not a causal explanation of why traffic changed. We do not claim to predict Google’s algorithm or prove that refresh actions will increase ranking. The model is best viewed as a decision-support ranking tool for editors: it helps prioritize review and triage, not as a guarantee of outcome.
+      </p>
+      <p>
+        The model can still make mistakes on pages with mixed signals or short-run volatility. It is strongest where demand is visible and the page is stale or under-engaged, and it is weakest when a page has conflicting data or a small sample. These are exactly the kinds of cases that should stay in a human review queue.
+      </p>
+    </section>
+
+    <section>
+      <h2>Ranked recommendations</h2>
+      <ol>
+        <li>Prioritize stale pages with visible demand and weak engagement before broader content cleanups.</li>
+        <li>Review pages ranked low in CTR but still appearing in the top positions for targeted search terms.</li>
+        <li>Use model probability as a triage score, then pair it with human judgment on content quality and business intent.</li>
+        <li>Monitor the same pages over a future period and compare observed changes against the score to calibrate maintenance thresholds.</li>
+        <li>Keep the workflow transparent: if a page is flagged, show the reason codes and the supporting signals so editors can disagree productively.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Reproducibility</h2>
+      <p>
+        The project is designed to be rerun from the workspace itself. The main artifacts live in the repo under <code>data/processed/</code>, <code>work/notebooks/</code>, and <code>work/outputs/</code>. The modeling logic is reproducible with a fixed random seed and the same client-aware split. The implementation used here is summarized in the capstone notebook and in the supporting script at <code>work/scripts/capstone_metrics.py</code>.
+      </p>
+      <ul>
+        <li>Notebook: <code>work/notebooks/w08_capstone_final.ipynb</code></li>
+        <li>Metrics output: <code>work/outputs/capstone_metrics.json</code></li>
+        <li>Paper page: <code>index.html</code></li>
+        <li>Submission URL file: <code>submission/paper_url.txt</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Acknowledgments &amp; data credit</h2>
+      <p>
+        Built on the <a href="https://flyrank.ai" target="_blank" rel="noopener noreferrer">FlyRank ML Internship dataset</a>. This project uses anonymized public-safe search data and is intended for research, learning, and decision-support workflows.
+      </p>
+    </section>
+  </div>
+</body>
+</html>

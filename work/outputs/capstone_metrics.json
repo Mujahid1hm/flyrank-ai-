@@ -1,0 +1,15 @@
+{
+  "test_set_size": 6163,
+  "unique_clients": 7,
+  "base_rate": 0.5109524582184002,
+  "baseline_p20": 0.4,
+  "model_p20": 0.7,
+  "baseline_p50": 0.32,
+  "model_p50": 0.72,
+  "baseline_p100": 0.31,
+  "model_p100": 0.7,
+  "baseline_auc": 0.497856883817089,
+  "model_auc": 0.6155213428684557,
+  "baseline_ap": 0.4818625764958999,
+  "model_ap": 0.6040353786280093
+}
